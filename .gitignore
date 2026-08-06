@@ -1,0 +1,129 @@
+# Ignore personal directories
+Desktop/
+Documents/
+Downloads/
+Music/
+Pictures/
+Videos/
+AppData/
+Contacts/
+Favorites/
+Links/
+OneDrive/
+Saved Games/
+Searches/
+SendTo/
+Start Menu/
+Templates/
+Application Data/
+Cookies/
+Local Settings/
+NetHood/
+PrintHood/
+Recent/
+
+# Ignore hidden system directories (except .git)
+.VirtualBox/
+.antigravity/
+.cache/
+.claude/
+.codex/
+.config/
+.cursor/
+.fcc/
+.gemini/
+.imibrowser/
+.local/
+.msat/
+.nietzsche/
+.opera/
+.pi/
+.qt-license/
+.redhat/
+.ssh/
+.thumbnails/
+.vscode/
+
+# Ignore specific files
+.bash_history
+.gitconfig
+.node_repl_history
+.packettracer
+.qt-license
+.NTUSER.DAT*
+NTUSER.DAT*
+ntuser.dat.LOG*
+ntuser.ini
+.claude.json
+
+# Ignore MATLAB files
+*.mat
+*.mlx
+*.slx
+
+# Ignore C/C++ build outputs
+*.o
+*.obj
+*.exe
+*.out
+*.app
+
+# Ignore Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Ignore Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+*.manifest
+*.spec
+
+# Ignore logs
+*.log
+log/
+logs/
+
+# Ignore environment
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Ignore miscellaneous
+.DS_Store
+Thumbs.db
+
+# Ignore specific personal directories/files observed
+Atlassian/
+"Cisco Packet Tracer 8.2.2"/
+Dropbox/
+FSE16107.c
+IntelGraphicsProfiles/
+MATLAB/
+"My Documents/"
+"OneDrive - Chipkin Automation Systems"/
