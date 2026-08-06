@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Kelvin Gichuhi</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <h1>Kelvin<span>Gichuhi</span></h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero fade-in">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Hi, I'm <span class="highlight">Kelvin Gichuhi</span></h1>
+                <div class="title">SDR & Backend Developer</div>
+                <p class="tagline">Building robust systems for signal processing, weather data, and full-stack applications.</p>
+                <a href="#projects" class="btn-primary">See My Work</a>
+            </div>
+            <div class="hero-image">
+                <div class="placeholder-image">
+                    <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="250" height="250" fill="#ecf0f1"/>
+                        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#555" font-size="14">Your Photo / Project Screenshot</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about section fade-in">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>I'm a passionate developer and engineer specializing in Software-Defined Radio (SDR), backend systems, and full-stack development. With experience in GNU Radio, Python, Node.js, and C++, I build solutions that process signals, serve data, and create engaging user experiences.</p>
+                    <p>My work spans from real-time signal processing chains to weather data APIs, from embedded C++ applications to interactive web dashboards. I enjoy solving complex problems at the intersection of hardware and software.</p>
+                    <div class="skills">
+                        <h3>Technical Skills</h3>
+                        <div class="skills-grid">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">GNU Radio</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">C++</span>
+                            <span class="skill-tag">MQTT/Sparkplug</span>
+                            <span class="skill-tag">HTML5/CSS3</span>
+                            <span class="skill-tag">Git & GitHub</span>
+                            <span class="skill-tag">REST APIs</span>
+                            <span class="skill-tag">Linux/Bash</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="placeholder-image">
+                        <svg width="250" height="250" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="250" height="250" fill="#ecf0f1"/>
+                            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#555" font-size="14">About / Bio Image</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects section fade-in">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Projects</h2>
+            </div>
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <div class="placeholder-image">
+                            <svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="300" height="200" fill="#ecf0f1"/>
+                                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#555" font-size="14">SDR Weather Backend</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>SDR Weather Backend</h3>
+                        <div class="project-category">Backend & Signal Processing</div>
+                        <p>A GNU Radio-based flowgraph that processes raw SDR signals, applies filtering, synchronization, demodulation, and error correction to decode weather data.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn-secondary">View Code</a>
+                            <a href="#" class="btn-primary">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 2 -->
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <div class="placeholder-image">
+                            <svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="300" height="200" fill="#ecf0f1"/>
+                                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#555" font-size="14">Weather API Service</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Real-time Weather API Service</h3>
+                        <div class="project-category">Full-Stack Web Application</div>
+                        <p>A Node.js/Express backend that fetches live weather data from WeatherStack API and serves it via REST endpoints, with a React frontend for visualization.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn-secondary">View Code</a>
+                            <a href="#" class="btn-primary">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 3 -->
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <div class="placeholder-image">
+                            <svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="300" height="200" fill="#ecf0f1"/>
+                                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#555" font-size="14">Chat Application</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>Interactive Chat Application</h3>
+                        <div class="project-category">Desktop Application</div>
+                        <p>A Python chat application using matplotlib for real-time data visualization and numpy for numerical computations, designed for signal analysis and monitoring.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn-secondary">View Code</a>
+                            <a href="#" class="btn-primary">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Project 4 -->
+                <div class="project-card fade-in">
+                    <div class="project-image">
+                        <div class="placeholder-image">
+                            <svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="300" height="200" fill="#ecf0f1"/>
+                                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#555" font-size="14">GPT Radio System</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="project-info">
+                        <h3>GPT Radio & TCP Communication</h3>
+                        <div class="project-category">Embedded Systems</div>
+                        <p>C++ implementations for radio communication protocols and TCP/IP networking, suitable for Arduino and embedded platforms requiring reliable data transmission.</p>
+                        <div class="project-links">
+                            <a href="#" class="btn-secondary">View Code</a>
+                            <a href="#" class="btn-primary">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog section fade-in">
+        <div class="container">
+            <div class="section-title">
+                <h2>Recent from the Blog</h2>
+            </div>
+            <div class="blog-grid">
+                <!-- Blog Post 1 -->
+                <div class="blog-card fade-in">
+                    <div class="blog-image">
+                        <div class="placeholder-image">
+                            <svg width="280" height="200" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="280" height="200" fill="#ecf0f1"/>
+                                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#555" font-size="14">Understanding CSS Grid</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="blog-info">
+                        <h3>Understanding CSS Grid</h3>
+                        <div class="blog-date">August 1, 2026</div>
+                        <p>A deep dive into modern layout techniques with CSS Grid, exploring how to create responsive, complex layouts without relying on frameworks.</p>
+                        <a href="blog-posts/post1.html" class="btn-link">Read Post</a>
+                    </div>
+                </div>
+                <!-- Blog Post 2 -->
+                <div class="blog-card fade-in">
+                    <div class="blog-image">
+                        <div class="placeholder-image">
+                            <svg width="280" height="200" viewBox="0 0 280 200" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="280" height="200" fill="#ecf0f1"/>
+                                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#555" font-size="14">JavaScript Performance</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="blog-info">
+                        <h3>JavaScript Performance Tips</h3>
+                        <div class="blog-date">July 20, 2026</div>
+                        <p>Practical advice for writing faster, more efficient JavaScript code, focusing on DOM optimization, requestAnimationFrame, and memory management.</p>
+                        <a href="blog-posts/post2.html" class="btn-link">Read Post</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section fade-in">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <p><span>���📧</span> kelvinmwaniki8@gmail.com</p>
+                    <p><span>���📍</span> Nairobi, Kenya</p>
+                    <p><span>���💼</span> Available for freelance and contract work</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link" aria-label="GitHub"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.45a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22m4 0v-.5a3 3 0 0 0-2.74-2.29C11.56 19.14 9.48 20.13 8 21.06V22h4z"/></svg></a>
+                        <a href="#" class="social-link" aria-label="LinkedIn"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5v-14c0-2.761-2.239-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.292c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.784 1.764-1.75 1.764zm13.5 12.292h-3v-5.598c0-1.091-.016-2.206-1.01-3.134-1.002-.953-2.414-.953-3.424 0v5.598h-3v-11c0-.485.043-.979.136-1.382.683-2.905 1.818-4.784 3.142-4.784h3.4v2.16c-.138-.602-.49-1.216-.99-1.216-1.236 0-1.883.876-1.883 2.139v8.986z"/></svg></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="your@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year"></span> Kelvin Gichuhi. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Projects</a>
+                <a href="#">Blog</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/menu.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+</html>

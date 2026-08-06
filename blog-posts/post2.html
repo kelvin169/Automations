@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Performance Tips | Kelvin Gichuhi</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <h1>Kelvin<span>Gichuhi</span></h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../blog.html">Blog</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <article class="post-container fade-in">
+        <header class="post-header">
+            <h1 class="post-title">JavaScript Performance Tips</h1>
+            <p class="post-meta">Published on <span class="post-date">July 20, 2026</span></p>
+        </header>
+        <div class="post-content">
+            <p>Writing fast JavaScript is essential for a smooth user experience. Here are some practical tips to keep your code performant.</p>
+            <h2>1. Minimize DOM Access</h2>
+            <p>DOM operations are expensive. Cache references to elements you use repeatedly.</p>
+            <pre><code>const button = document.getElementById('myBtn');
+for (let i = 0; i < items.length; i++) {
+  button.textContent = items[i];
+}
+</code></pre>
+            <h2>2. Use Request Animation Frame for Animations</h2>
+            <p>Instead of <code>setTimeout</code> or <code>setInterval</code>, use <code>requestAnimationFrame</code> to sync with the browser's paint cycle.</p>
+            <pre><code>function animate() {
+  // update animation
+  requestAnimationFrame(animate);
+}
+requestAnimationFrame(animate);
+</code></pre>
+            <h2>3. Debounce and Throttle Event Handlers</h2>
+            <p>For events like scroll or resize, limit how often your handler runs.</p>
+            <pre><code>function debounce(fn, delay) {
+  let timeout;
+  return function () {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => fn.apply(this, arguments), delay);
+  };
+}
+window.addEventListener('resize', debounce(() => {
+  // handle resize
+}, 200));
+</code></pre>
+            <h2>4. Avoid Memory Leaks</h2>
+            <p>Remove event listeners and cancel animation frames when they’re no longer needed.</p>
+            <p>By applying these patterns, your apps will feel snappier and consume less battery on mobile devices.</p>
+        </div>
+        <footer class="post-footer">
+            <a href="../blog.html" class="btn-link">← Back to Blog</a>
+        </footer>
+    </article>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year"></span> Kelvin Gichuhi. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="../index.html">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#projects">Projects</a>
+                <a href="../blog.html">Blog</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/menu.js"></script>
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>

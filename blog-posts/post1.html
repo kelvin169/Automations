@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding CSS Grid | Kelvin Gichuhi</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <h1>Kelvin<span>Gichuhi</span></h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../blog.html">Blog</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <article class="post-container fade-in">
+        <header class="post-header">
+            <h1 class="post-title">Understanding CSS Grid</h1>
+            <p class="post-meta">Published on <span class="post-date">August 1, 2026</span></p>
+        </header>
+        <div class="post-content">
+            <p>CSS Grid Layout is a powerful two‑dimensional system that lets you create complex responsive layouts with ease.</p>
+            <p>Unlike Flexbox, which is primarily one‑dimensional, Grid allows you to control both rows and columns simultaneously.</p>
+            <h2>Basic Concepts</h2>
+            <p>You define a grid container with <code>display: grid;</code> and then set up rows and columns using <code>grid-template-rows</code> and <code>grid-template-columns</code>.</p>
+            <pre><code>.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+</code></pre>
+            <p>Items placed inside the container automatically flow into the grid cells, but you can also position them explicitly with <code>grid-column</code> and <code>grid-row</code>.</p>
+            <h2>Why Use Grid?</h2>
+            <ul>
+                <li>Precise control over alignment and spacing.</li>
+                <li>Ability to create complex layouts without extra markup.</li>
+                <li>Responsive by default – you can redefine grid areas at different breakpoints.</li>
+            </ul>
+            <p>Start experimenting today and see how Grid simplifies your CSS!</p>
+        </div>
+        <footer class="post-footer">
+            <a href="../blog.html" class="btn-link">← Back to Blog</a>
+        </footer>
+    </article>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year"></span> Kelvin Gichuhi. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="../index.html">Home</a>
+                <a href="../index.html#about">About</a>
+                <a href="../index.html#projects">Projects</a>
+                <a href="../blog.html">Blog</a>
+                <a href="../index.html#contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/menu.js"></script>
+    <script src="../assets/js/script.js"></script>
+</body>
+</html>
