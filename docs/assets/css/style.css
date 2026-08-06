@@ -1,0 +1,26 @@
+/* Simple, clean styling */
+:root {
+  --font-sans: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --bg-color: #fafafa;
+  --text-color: #333;
+  --accent: #0066cc;
+}
+* { box-sizing: border-box; margin:0; padding:0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+}
+header, footer { text-align:center; padding:2rem 1rem; }
+header h1 { font-size:2.5rem; margin-bottom:0.5rem; }
+header p { color:#666; font-size:1.2rem; }
+section { max-width:800px; margin:2rem auto; padding:0 1rem; }
+section h2 { border-bottom:2px solid var(--accent); padding-bottom:0.3rem; margin-bottom:1rem; color:var(--accent); }
+ul { list-style:none; }
+li { background:#fff; margin:0.5rem 0; padding:1rem; border-left:4px solid var(--accent); box-shadow:0 1px 3px rgba(0,0,0,0.1); }
+footer a { color:var(--accent); text-decoration:none; }
+footer a:hover { text-decoration:underline; }
+@media (max-width:600px) {
+  header h1 { font-size:2rem; }
+}

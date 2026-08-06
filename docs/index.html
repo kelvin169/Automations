@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kelvin Mwaniki – Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Kelvin Mwaniki</h1>
+    <p>Creative designer &amp; problem solver</p>
+  </header>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I’m a passionate developer and designer based in Kenya, interested in
+      embedded systems, web applications, and creative problem‑solving.
+    </p>
+  </section>
+
+  <section id="projects">
+    <h2>Selected Projects</h2>
+    <ul>
+      <li><strong>SDR Weather Backend</strong> – GNU Radio flowgraph for signal processing.</li>
+      <li><strong>Weather API Script</strong> – Node.js fetches live weather data.</li>
+      <li><strong>Chat Experiment</strong> – Simple Python script with matplotlib/numpy.</li>
+      <li><strong>GPT Radio &amp; TCP Connection</strong> – C++ examples for radio/TCP comms.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Kelvin Mwaniki •
+       <a href="https://github.com/kelvin169/Automations" target="_blank">View source on GitHub</a>
+    </p>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
