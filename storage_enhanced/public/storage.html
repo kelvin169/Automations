@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced Personal Cloud Storage</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .upload-section {
+            padding: 30px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .upload-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .upload-box {
+            border: 2px dashed #ccc;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .upload-box:hover {
+            border-color: #667eea;
+            background: #f0f7ff;
+        }
+
+        .upload-box.dragover {
+            border-color: #667eea;
+            background: #e6f0ff;
+            transform: scale(1.02);
+        }
+
+        .upload-box i {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .upload-box p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .btn-upload {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-upload:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-upload:active {
+            transform: translateY(0);
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .files-section {
+            padding: 30px;
+        }
+
+        .files-section h2 {
+            color: #333;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-box {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #eee;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .search-box i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        .files-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .file-card {
+            background: #fafafa;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+
+        .file-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+            border-color: #ddd;
+        }
+
+        .file-card img.file-preview {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-bottom: 1px solid #eee;
+        }
+
+        .file-card .file-info {
+            padding: 20px;
+        }
+
+        .file-card .file-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .file-card .file-header h3 {
+            color: #333;
+            margin: 0;
+            font-size: 1.1rem;
+            flex-grow: 1;
+        }
+
+        .file-card .file-header .file-size {
+            background: #eee;
+            color: #666;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+        }
+
+        .file-card .file-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .file-card .file-actions button {
+            flex: 1;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+        }
+
+        .file-card .file-actions .btn-download {
+            background: linear-gradient(135deg, #4cc9f0 0%, #48cae4 100%);
+            color: white;
+        }
+
+        .file-card .file-actions .btn-download:hover {
+            background: linear-gradient(135deg, #48cae4 0%, #4cc9f0 100%);
+            transform: scale(1.05);
+        }
+
+        .file-card .file-actions .btn-delete {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+            color: white;
+        }
+
+        .file-card .file-actions .btn-delete:hover {
+            background: linear-gradient(135deg, #ff5252 0%, #ff6b6b 100%);
+            transform: scale(1.05);
+        }
+
+        .no-files {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .no-files i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .upload-progress {
+            margin-top: 20px;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #eee;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .stats-bar {
+            background: #f8f9fa;
+            padding: 15px 30px;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .stat-item i {
+            font-size: 1.5rem;
+            color: #667eea;
+        }
+
+        .stat-item span {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .stat-item small {
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .modal-content h3 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+        }
+
+        .modal-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn.confirm {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+            color: white;
+        }
+
+        .modal-btn.cancel {
+            background: #eee;
+            color: #666;
+        }
+
+        .modal-btn.confirm:hover {
+            background: linear-gradient(135deg, #ff5252 0%, #ff6b6b 100%);
+            transform: scale(1.05);
+        }
+
+        .modal-btn.cancel:hover {
+            background: #ddd;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .files-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .files-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-bar {
+                flex-direction: column;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-cloud"></i> Enhanced Cloud Storage</h1>
+            <p>Your personal file storage solution with advanced features</p>
+        </header>
+
+        <div class="upload-section">
+            <h2><i class="fas fa-upload"></i> Upload Files</h2>
+            <div class="upload-box" id="uploadBox">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Drag & drop files here, or click to select</p>
+                <input type="file" id="fileInput" multiple>
+                <button class="btn-upload" id="btnUpload">Select Files</button>
+            </div>
+            <div class="upload-progress" id="uploadProgress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p id="progressText">0%</p>
+            </div>
+        </div>
+
+        <div class="stats-bar" id="statsBar">
+            <div class="stat-item">
+                <i class="fas fa-folder"></i>
+                <span id="fileCount">0</span>
+                <small>Files</small>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-hdd"></i>
+                <span id="totalSize">0 MB</span>
+                <small>Storage Used</small>
+            </div>
+            <div class="stat-item">
+                <i class="fas fa-tachometer-alt"></i>
+                <span id="uploadSpeed">0 MB/s</span>
+                <small>Upload Speed</small>
+            </div>
+        </div>
+
+        <div class="files-section">
+            <h2><i class="fas fa-files"></i> Your Files</h2>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search files...">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="files-grid" id="filesGrid">
+                <!-- File cards will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal" id="deleteModal">
+        <div class="modal-content">
+            <h3>Delete File</h3>
+            <p>Are you sure you want to delete "<span id="fileToDelete"></span>"?</p>
+            <p class="text-danger">This action cannot be undone.</p>
+            <div class="modal-buttons">
+                <button class="modal-btn cancel" id="btnCancelDelete">Cancel</button>
+                <button class="modal-btn confirm" id="btnConfirmDelete">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let deleteFilename = null;
+        let uploadStartTime = null;
+
+        // DOM Elements
+        const uploadBox = document.getElementById('uploadBox');
+        const fileInput = document.getElementById('fileInput');
+        const btnUpload = document.getElementById('btnUpload');
+        const uploadProgress = document.getElementById('uploadProgress');
+        const progressFill = document.getElementById('progressFill');
+        const progressText = document.getElementById('progressText');
+        const filesGrid = document.getElementById('filesGrid');
+        const searchInput = document.getElementById('searchInput');
+        const statsBar = document.getElementById('statsBar');
+        const fileCountEl = document.getElementById('fileCount');
+        const totalSizeEl = document.getElementById('totalSize');
+        const uploadSpeedEl = document.getElementById('uploadSpeed');
+        const deleteModal = document.getElementById('deleteModal');
+        const fileToDeleteEl = document.getElementById('fileToDelete');
+        const btnCancelDelete = document.getElementById('btnCancelDelete');
+        const btnConfirmDelete = document.getElementById('btnConfirmDelete');
+
+        // Initialize
+        loadFiles();
+        updateStats();
+
+        // Event Listeners
+        btnUpload.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', handleFileSelect);
+
+        uploadBox.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadBox.classList.add('dragover');
+        });
+
+        uploadBox.addEventListener('dragleave', () => {
+            uploadBox.classList.remove('dragover');
+        });
+
+        uploadBox.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadBox.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length) {
+                fileInput.files = files;
+                handleFileSelect();
+            }
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            filterFiles(e.target.value);
+        });
+
+        // Modal Events
+        btnCancelDelete.addEventListener('click', () => {
+            deleteModal.style.display = 'none';
+            deleteFilename = null;
+        });
+
+        btnConfirmDelete.addEventListener('click', deleteFileConfirmed);
+
+        window.addEventListener('click', (e) => {
+            if (e.target === deleteModal) {
+                deleteModal.style.display = 'none';
+                deleteFilename = null;
+            }
+        });
+
+        // Functions
+        function handleFileSelect() {
+            const files = fileInput.files;
+            if (!files.length) return;
+
+            uploadStartTime = Date.now();
+            let filesProcessed = 0;
+
+            Array.from(files).forEach(file => {
+                if (file.size > 10 * 1024 * 1024) { // 10MB limit
+                    alert(`File "${file.name}" is too large (max 10MB)`);
+                    return;
+                }
+
+                uploadFile(file);
+            });
+
+            fileInput.value = ''; // Reset input
+        }
+
+        function uploadFile(file) {
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/api/upload');
+
+            xhr.upload.onprogress = (e) => {
+                if (e.lengthComputable) {
+                    const percent = (e.loaded / e.total) * 100;
+                    progressFill.style.width = percent + '%';
+                    progressText.textContent = Math.round(percent) + '%';
+                }
+            };
+
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    filesProcessed++;
+                    if (filesProcessed === Array.from(fileInput.files).length) {
+                        uploadProgress.style.display = 'none';
+                        progressFill.style.width = '0%';
+                        progressText.textContent = '0%';
+                        loadFiles();
+                        updateStats();
+                    }
+                } else {
+                    alert('Upload failed: ' + xhr.responseText);
+                }
+            };
+
+            xhr.onerror = () => {
+                alert('Network error during upload');
+            };
+
+            xhr.send(formData);
+            uploadProgress.style.display = 'block';
+        }
+
+        function loadFiles() {
+            fetch('/api/files')
+                .then(response => response.json())
+                .then(files => {
+                    displayFiles(files);
+                })
+                .catch(error => {
+                    console.error('Error loading files:', error);
+                    filesGrid.innerHTML = '<p class="no-files"><i class="fas fa-exclamation-triangle"></i> Error loading files</p>';
+                });
+        }
+
+        function displayFiles(files) {
+            if (files.length === 0) {
+                filesGrid.innerHTML = `
+                    <div class="no-files">
+                        <i class="fas fa-inbox"></i>
+                        <p>No files uploaded yet</p>
+                        <p>Drag & drop files above to get started</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Filter by search term
+            const searchTerm = searchInput.value.toLowerCase();
+            const filteredFiles = files.filter(file =>
+                file.originalname.toLowerCase().includes(searchTerm)
+            );
+
+            if (filteredFiles.length === 0) {
+                filesGrid.innerHTML = `
+                    <div class="no-files">
+                        <i class="fas fa-search"></i>
+                        <p>No files match your search</p>
+                        <p>Try a different search term</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filesGrid.innerHTML = filteredFiles.map(file => {
+                const fileType = getFileType(file.originalname);
+                const icon = getFileIcon(fileType);
+                const size = formatFileSize(file.size);
+                const downloadUrl = `/api/files/${encodeURIComponent(file.filename)}`;
+
+                return `
+                    <div class="file-card" data-filename="${file.filename}" data-originalname="${file.originalname}">
+                        ${fileType.startsWith('image/') ?
+                            `<img class="file-preview" src="${downloadUrl}" alt="${file.originalname}">` :
+                            `<div class="file-preview">
+                                <i class="${icon}" style="font-size: 4rem; color: #667eea;"></i>
+                            </div>`}
+                        <div class="file-info">
+                            <div class="file-header">
+                                <h3 title="${file.originalname}">${truncateFilename(file.originalname, 20)}</h3>
+                                <span class="file-size">${size}</span>
+                            </div>
+                            <div class="file-actions">
+                                <button class="btn-download" onclick="downloadFile('${encodeURIComponent(file.filename)}')">
+                                    <i class="fas fa-download"></i> Download
+                                </button>
+                                <button class="btn-delete" onclick="prepareDelete('${file.filename}', '${file.originalname}')">
+                                    <i class="fas fa-trash"></i> Delete
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function filterFiles(searchTerm) {
+            loadFiles(); // Reload and filter will happen in displayFiles
+        }
+
+        function downloadFile(filename) {
+            window.location.href = `/api/files/${filename}`;
+        }
+
+        function prepareDelete(filename, originalname) {
+            deleteFilename = filename;
+            fileToDeleteEl.textContent = originalname;
+            deleteModal.style.display = 'flex';
+        }
+
+        function deleteFileConfirmed() {
+            if (!deleteFilename) return;
+
+            fetch(`/api/files/${encodeURIComponent(deleteFilename)}`, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (response.ok) {
+                    deleteModal.style.display = 'none';
+                    loadFiles();
+                    updateStats();
+                } else {
+                    return response.text().then(text => { throw new Error(text); });
+                }
+            })
+            .catch(error => {
+                alert('Error deleting file: ' + error.message);
+            });
+        }
+
+        function updateStats() {
+            fetch('/api/files')
+                .then(response => response.json())
+                .then(files => {
+                    const count = files.length;
+                    const totalBytes = files.reduce((sum, file) => sum + file.size, 0);
+                    const totalMB = (totalBytes / (1024 * 1024)).toFixed(2);
+
+                    fileCountEl.textContent = count;
+                    totalSizeEl.textContent = totalMB + ' MB';
+
+                    // Calculate upload speed (rough estimate)
+                    if (uploadStartTime) {
+                        const elapsed = (Date.now() - uploadStartTime) / 1000; // seconds
+                        const speed = elapsed > 0 ? (totalBytes / elapsed / (1024 * 1024)).toFixed(2) : 0;
+                        uploadSpeedEl.textContent = speed + ' MB/s';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating stats:', error);
+                });
+        }
+
+        function getFileType(filename) {
+            const extension = filename.split('.').pop().toLowerCase();
+            const typeMap = {
+                'jpg': 'image/jpeg', 'jpeg': 'image/jpeg', 'png': 'image/png', 'gif': 'image/gif',
+                'pdf': 'application/pdf', 'txt': 'text/plain', 'doc': 'application/msword',
+                'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                'xls': 'application/vnd.ms-excel', 'xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                'zip': 'application/zip', 'rar': 'application/x-rar-compressed',
+                'mp3': 'audio/mpeg', 'wav': 'audio/wav', 'mp4': 'video/mp4', 'avi': 'video/x-msvideo'
+            };
+            return typeMap[extension] || 'application/octet-stream';
+        }
+
+        function getFileIcon(fileType) {
+            if (fileType.startsWith('image/')) return 'fas fa-image';
+            if (fileType.startsWith('video/')) return 'fas fa-video';
+            if (fileType.startsWith('audio/')) return 'fas fa-music';
+            if (fileType === 'application/pdf') return 'fas fa-file-pdf';
+            if (fileType.includes('word')) return 'fas fa-file-word';
+            if (fileType.includes('excel') || fileType.includes('spreadsheet')) return 'fas fa-file-excel';
+            if (fileType === 'text/plain') return 'fas fa-file-alt';
+            if (fileType.includes('zip') || fileType.includes('rar')) return 'fas fa-file-archive';
+            return 'fas fa-file';
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+
+        function truncateFilename(filename, maxLength) {
+            if (filename.length <= maxLength) return filename;
+            return filename.substring(0, maxLength - 3) + '...';
+        }
+
+        // Auto-refresh stats every 5 seconds
+        setInterval(updateStats, 5000);
+    </script>
+</body>
+</html>
