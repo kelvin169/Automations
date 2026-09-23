@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Cloud Storage</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        #uploadForm {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+        #uploadForm input[type="file"] {
+            display: block;
+            margin-bottom: 10px;
+        }
+        #uploadForm button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #uploadForm button:hover {
+            background-color: #0056b3;
+        }
+        #fileList {
+            margin-top: 20px;
+        }
+        #fileList h2 {
+            color: #555;
+        }
+        #fileList ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        #fileList li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #f9f9f9;
+            margin-bottom: 5px;
+            border-radius: 4px;
+        }
+        #fileList li a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        #fileList li a:hover {
+            text-decoration: underline;
+        }
+        #fileList li span {
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Personal Cloud Storage</h1>
+        <div id="uploadForm">
+            <h2>Upload File</h2>
+            <form id="uploadFormElement" enctype="multipart/form-data">
+                <input type="file" id="fileInput" required>
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+        <div id="fileList">
+            <h2>Files</h2>
+            <ul id="fileListElement">
+                <!-- Files will be listed here by JavaScript -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Function to fetch and display the file list
+        async function loadFileList() {
+            try {
+                const response = await fetch('/api/files');
+                const files = await response.json();
+                const fileListElement = document.getElementById('fileListElement');
+                fileListElement.innerHTML = ''; // Clear existing list
+
+                if (files.length === 0) {
+                    fileListElement.innerHTML = '<li>No files uploaded yet.</li>';
+                    return;
+                }
+
+                files.forEach(file => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <span>
+                            <a href="/api/files/${encodeURIComponent(file.filename)}" download>${file.filename}</a>
+                        </span>
+                        <span>${(file.size / 1024).toFixed(2)} KB</span>
+                    `;
+                    fileListElement.appendChild(li);
+                });
+            } catch (error) {
+                console.error('Error loading file list:', error);
+                document.getElementById('fileListElement').innerHTML = '<li>Error loading files.</li>';
+            }
+        }
+
+        // Handle file upload
+        document.getElementById('uploadFormElement').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await fetch('/api/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    alert('File uploaded successfully!');
+                    fileInput.value = ''; // Clear the input
+                    loadFileList(); // Refresh the file list
+                } else {
+                    const errorData = await response.json();
+                    alert('Upload failed: ' + (errorData.error || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Error uploading file:', error);
+                alert('Upload failed: Network error');
+            }
+        });
+
+        // Load file list on page load
+        loadFileList();
+    </script>
+</body>
+</html>
